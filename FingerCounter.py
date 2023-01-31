@@ -3,6 +3,10 @@ import time
 import os
 import HandTrackingModule as htm
 
+# * Constants
+landmark_x = 1
+landmark_y = 2
+
 cam_width = 1280
 cam_height = 720
 
@@ -28,6 +32,14 @@ while True:
     success, img = cap.read()
     
     img = detector.findHands(img)
+    
+    landmark_list = detector.findPosition(img, draw = False)
+    
+    if len(landmark_list) != 0:
+        if landmark_list[8][landmark_y] < landmark_list[6][landmark_y]:
+            print("Index finger open")
+        else:
+            print("Index finger closed")
     
     height, width, center = overlayList[0].shape
     img[100 : height + 100, 0 : width] = overlayList[0]
