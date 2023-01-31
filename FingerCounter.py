@@ -57,8 +57,8 @@ while True:
         total_fingers = fingers.count(1)
         print(total_fingers)
     
-    height, width, center = overlayList[0].shape
-    img[100 : height + 100, 0 : width] = overlayList[0]
+        height, width, center = overlayList[total_fingers].shape
+        img[100 : height + 100, 0 : width] = overlayList[total_fingers]
     
     curr_time = time.time()
     fps = 1 / (curr_time - prev_time)
