@@ -1,6 +1,7 @@
 import cv2
 import time
 import os
+import HandTrackingModule as htm
 
 cam_width = 1280
 cam_height = 720
@@ -25,7 +26,7 @@ while True:
     success, img = cap.read()
     
     height, width, center = overlayList[0].shape
-    img[0 : height, 0 : width] = overlayList[0]
+    img[100 : height + 100, 0 : width] = overlayList[0]
     
     curr_time = time.time()
     fps = 1 / (curr_time - prev_time)
