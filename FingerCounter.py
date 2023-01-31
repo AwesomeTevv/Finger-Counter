@@ -17,6 +17,8 @@ curr_time = 0
 folderPath = "HandImages"
 myList = os.listdir(folderPath)
 
+detector = htm.handDetector(detectionConfidence = 0.75)
+
 overlayList = []
 for imgPath in myList:
     image = cv2.imread(f'{folderPath}/{imgPath}')
@@ -24,6 +26,8 @@ for imgPath in myList:
 
 while True:
     success, img = cap.read()
+    
+    img = detector.findHands(img)
     
     height, width, center = overlayList[0].shape
     img[100 : height + 100, 0 : width] = overlayList[0]
