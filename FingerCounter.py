@@ -5,10 +5,10 @@ import os
 cam_width = 1280
 cam_height = 720
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
-cap.set(3, cam_width)
-cap.set(4, cam_height)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, cam_width)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, cam_height)
 
 prev_time = 0
 curr_time = 0
@@ -23,6 +23,8 @@ for imgPath in myList:
 
 while True:
     success, img = cap.read()
+    
+    img[0 : 500, 0 : 500] = overlayList[0]
     
     curr_time = time.time()
     fps = 1 / (curr_time - prev_time)
