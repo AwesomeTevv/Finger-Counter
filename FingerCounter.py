@@ -24,7 +24,8 @@ for imgPath in myList:
 while True:
     success, img = cap.read()
     
-    img[0 : 500, 0 : 500] = overlayList[0]
+    height, width, center = overlayList[0].shape
+    img[0 : height, 0 : width] = overlayList[0]
     
     curr_time = time.time()
     fps = 1 / (curr_time - prev_time)
