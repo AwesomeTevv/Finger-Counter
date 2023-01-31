@@ -55,10 +55,13 @@ while True:
         
         # print(fingers)
         total_fingers = fingers.count(1)
-        print(total_fingers)
+        # print(total_fingers)
     
         height, width, center = overlayList[total_fingers].shape
-        img[100 : height + 100, 0 : width] = overlayList[total_fingers]
+        img[50 : height + 50, 25 : width + 25] = overlayList[total_fingers]
+        
+        cv2.rectangle(img, (25, 575), (525, 700), (0, 255, 0), cv2.FILLED)
+        cv2.putText(img, f'{total_fingers}', (225, 690), cv2.FONT_HERSHEY_PLAIN, 10, (0, 0, 0), 3)
     
     curr_time = time.time()
     fps = 1 / (curr_time - prev_time)
