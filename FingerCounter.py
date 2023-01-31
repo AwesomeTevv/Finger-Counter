@@ -28,6 +28,8 @@ for imgPath in myList:
     image = cv2.imread(f'{folderPath}/{imgPath}')
     overlayList.append(image)
 
+fingertip_ids = [8, 12, 16, 20]
+
 while True:
     success, img = cap.read()
     
@@ -36,10 +38,24 @@ while True:
     landmark_list = detector.findPosition(img, draw = False)
     
     if len(landmark_list) != 0:
-        if landmark_list[8][landmark_y] < landmark_list[6][landmark_y]:
-            print("Index finger open")
+        fingers = []
+        
+        #! Checking if the thumb is out
+        if landmark_list[4][landmark_x] > landmark_list[3][landmark_x]:
+            fingers.append(1)
         else:
-            print("Index finger closed")
+            fingers.append(0)
+        
+        #! Checking if the other fingers are out
+        for tip in fingertip_ids:
+            if landmark_list[tip][landmark_y] < landmark_list[tip - 2][landmark_y]:
+                fingers.append(1)
+            else:
+                fingers.append(0)
+        
+        # print(fingers)
+        total_fingers = fingers.count(1)
+        print(total_fingers)
     
     height, width, center = overlayList[0].shape
     img[100 : height + 100, 0 : width] = overlayList[0]
