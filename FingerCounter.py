@@ -13,6 +13,14 @@ cap.set(4, cam_height)
 prev_time = 0
 curr_time = 0
 
+folderPath = "HandImages"
+myList = os.listdir(folderPath)
+
+overlayList = []
+for imgPath in myList:
+    image = cv2.imread(f'{folderPath}/{imgPath}')
+    overlayList.append(image)
+
 while True:
     success, img = cap.read()
     
